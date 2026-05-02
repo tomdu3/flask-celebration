@@ -16,9 +16,10 @@ def home():
     }
     Heading = "Welcome to Flask!"
     My_stuff="Flask is fun!"
+    my_friends=['fajar','neethu','Tomi','Rohini']
 
     return render_template("index.html", context=context, Heading=Heading,
-                           My_stuff=My_stuff)
+                           My_stuff=My_stuff,my_friends=my_friends)
 
 
 if __name__ == "__main__":
