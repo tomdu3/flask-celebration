@@ -21,6 +21,9 @@ def home():
     return render_template("index.html", context=context, Heading=Heading,
                            My_stuff=My_stuff,my_friends=my_friends)
 
+@app.route("/guess/<name>")
+def guess(name):
+    return render_template("guess.html",gues_name=name)
 
 if __name__ == "__main__":
     app.run(debug=True)
