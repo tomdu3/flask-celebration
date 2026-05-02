@@ -29,7 +29,11 @@
     </ul>
     <ul>
       {%for friend in my_friends%}
-      <li>{{friend}}</li>
+      {% if friend =="fajar"%}
+            Hello fajar
+        {% else %}
+        <li>{{friend}}</li>
+      {% endif %}
       {% endfor %}
     </ul>
   </body>
