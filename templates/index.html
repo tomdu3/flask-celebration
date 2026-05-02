@@ -7,8 +7,10 @@
     <title>{{context.title}}</title>
   </head>
   <body>
-    <H1>{{ Heading|upper }}</H1>
+    <h1>{{ Heading|upper }}</h1>
     <h1>{{context.title}}</h1>
+    
+    <h2>{{My_stuff|safe}}
     <p>{{ context.message }}</p>
     <p>Name: {{ context.name }}</p>
     <p>Age: {{ context.age }}</p>
