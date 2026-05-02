@@ -14,8 +14,9 @@ def home():
         "hobbies": ["reading", "coding", "playing games"],
         "friends": ["Tom", "Jerry", "Harry"],
     }
+    Heading = "Welcome to Flask!"
 
-    return render_template("index.html", context=context)
+    return render_template("index.html", context=context, Heading=Heading)
 
 
 if __name__ == "__main__":
