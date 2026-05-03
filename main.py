@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,jsonify,request
 import requests
+
 
 app = Flask(__name__)
 
@@ -24,6 +25,7 @@ def home():
 
 @app.route("/guess/<name>")
 def guess(name):
+    """Get gender and age from gederize api"""
     gender_url=f"https://api.genderize.io?name={name}"
     age_url=f"https://api.agify.io?name={name}"
     get_age_url_response=requests.get(age_url)
@@ -34,6 +36,25 @@ def guess(name):
     gender=get_gender_data["gender"]
     
     return render_template("guess.html",gues_name=name,gender=gender,age=age)
+
+
+"""Simple Api for getting users list
+and adding users to list and tested with postman"""
+
+name_list=["sumi","ra","Tom"]
+@app.route("/users",methods=['GET'])
+
+def ger_users():
+    return jsonify ({"users": name_list})
+
+@app.route("/users",methods=["POST"])
+def create_users():
+    data=request.get_json()
+    name=data.get("name")
+    if not data or "name" not in data:
+        return jsonify({"error":"Invalid input"}),400
+    name_list.append(name)
+    return jsonify({"users":name_list}),201
     
 
 if __name__ == "__main__":
