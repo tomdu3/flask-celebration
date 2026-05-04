@@ -8,7 +8,7 @@ Testing with Postman
 ![Get_users API Postman testing](image.png)
 ![Create_users9(POST) API Postman testing](image-1.png)
 
-## Testing API with REST.client VS Code Extension
+## Testing API with `REST.client` VS Code Extension
 [REST.client VS Code Extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) allows you to send HTTP request and view the response in Visual Studio Code directly. It is a great tool for testing APIs by sending the requests stored in a file with usually a `.http` extension. You can send the requests by clicking "Send Request" button on top of the file. The output will be displayed in the output panel in VS Code. 
 
 Our test file is [api.rest](api.rest). It contains the following requests:
