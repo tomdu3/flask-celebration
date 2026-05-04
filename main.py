@@ -23,6 +23,7 @@ def home():
     return render_template("index.html", context=context, Heading=Heading,
                            My_stuff=My_stuff,my_friends=my_friends)
 
+
 @app.route("/guess/<name>")
 def guess(name):
     """Get gender and age from gederize api"""
@@ -41,20 +42,29 @@ def guess(name):
 """Simple Api for getting users list
 and adding users to list and tested with postman"""
 
+# Simulated database
 name_list=["sumi","ra","Tom"]
-@app.route("/users",methods=['GET'])
 
+# API endpoints
+@app.route("/users",methods=['GET'])
 def ger_users():
     return jsonify ({"users": name_list})
+
 
 @app.route("/users",methods=["POST"])
 def create_users():
     data=request.get_json()
-    name=data.get("name")
-    if not data or "name" not in data:
+    name=data.get("name")  # None if 'name' is not present
+    
+    # check if the data given from the user is valid
+    if not data or not name:
         return jsonify({"error":"Invalid input"}),400
+    # check if the user is already in the list
+    if name in name_list:
+        return jsonify({"error":"User already exists"}),409
     name_list.append(name)
-    return jsonify({"users":name_list}),201
+    return jsonify(
+        {"message": f"User {name} created successfully"}),201
     
 
 if __name__ == "__main__":
