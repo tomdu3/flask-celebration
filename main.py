@@ -77,6 +77,33 @@ def create_users():
         {"message": f"User {name} created successfully"}),201
     
 
+@app.route("/url")
+def url_shortener():
+    return render_template("url.html")
+
+@app.route("/shorten",methods=["POST"])
+def submit():
+    or_url=request.form.get("url")
+    exist_url=Url.query.filter_by(original_url=or_url).first()
+    if exist_url:
+        return jsonify({"message":"URL already exists","short_url":exist_url.short_url})
+    new_original_url=Url(original_url=or_url,short_url="temp")
+    db.session.add(new_original_url)
+    db.session.commit()
+    return "Data saved"
+
+@app.route("/url/all",methods=["GET"])
+def url_all():
+    urls=Url.query.all()
+    output=[]
+    for url in urls:
+        output.append({
+            "id":url.id,
+            "original_url":url.original_url,
+            "short_url":url.short_url})
+    return jsonify(output)
+            
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
