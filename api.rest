@@ -1,0 +1,35 @@
+# test api endpoints
+
+## get all users
+GET http://localhost:5000/users
+
+
+###
+
+## Create a new user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "testuser"
+}
+
+###
+
+## Invalid user creation data 
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "Age": 25
+}
+
+###
+
+## Duplicate user creation data 
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "testuser"
+}
