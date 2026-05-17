@@ -102,6 +102,14 @@ def url_all():
             "original_url":url.original_url,
             "short_url":url.short_url})
     return jsonify(output)
+
+
+@app.route("/url/<int:id>",methods=["GET"])
+def url_by_id(id):
+    url =Url.query.get_or_404(id)
+    return jsonify({"id":url.id,
+                    "Original_url":url.original_url,
+                    "Short_url":url.short_url})
             
 
 if __name__ == "__main__":
