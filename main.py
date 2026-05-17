@@ -1,9 +1,19 @@
 from flask import Flask, render_template,jsonify,request
 import requests
-
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+##ConfigureSqlAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///url.db'
+db = SQLAlchemy(app)
 
+class Url(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    original_url = db.Column(db.String(255), nullable=False)
+    short_url = db.Column(db.String(255), nullable=False)
+    
+    def __repr__(self):
+        return f"<Url {self.original_url} -> {self.short_url}>"
 
 @app.route("/")
 def home():
@@ -58,4 +68,6 @@ def create_users():
     
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
